@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 	"strings"
 
 	"github.com/gocolly/colly"
@@ -54,7 +55,7 @@ func extractData(search *Search, result chan []Product) {
 		log.Fatalln("[main.searchProduct]", err)
 	})
 
-	c.Visit("https://lista.mercadolivre.com.br/" + search.Text)
+	c.Visit(os.Getenv("URL_MERCADOLIVRE_SEARCH_ITEM") + search.Text)
 }
 
 func getProductName(elem *colly.HTMLElement) string {
